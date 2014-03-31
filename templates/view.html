@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<!--
+Copyright 2014 Quincy Bowers.  All rights reserved.
+-->
+
+<html>
+<head>
+  <title>{{.Title}}</title>
+  <link rel="stylesheet" type="text/css" href="/resources/default.css" />
+</head>
+<body>
+<h1>{{.Title}}</h1>
+
+<!-- Page Body -->
+<div>
+    <h1>Ingredients</h1>
+    <div>{{.Ingredients}}</div>
+</div>
+<div>
+    <h1>Instructions</h1>
+    <div>{{.Instructions}}</div>
+</div>
+<p>[<a href="/edit/{{.Filename}}">edit</a>]</p>
+
+</body>
+</html>
+
