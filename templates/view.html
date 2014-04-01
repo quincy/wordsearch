@@ -6,22 +6,32 @@ Copyright 2014 Quincy Bowers.  All rights reserved.
 
 <html>
 <head>
-  <title>{{.Title}}</title>
-  <link rel="stylesheet" type="text/css" href="/resources/default.css" />
+  <title>{{.Title}} - {{.Query}}</title>
 </head>
 <body>
 <h1>{{.Title}}</h1>
 
 <!-- Page Body -->
 <div>
-    <h1>Ingredients</h1>
-    <div>{{.Ingredients}}</div>
+    <h1>Search</h1>
+    <form action="/search" method="GET">
+        Search Pattern: <input type="text" name="query" size="80" value="{{.Query}}">
+        <br>
+        Minimum Length: <input type="text" name="min" size="2" value="{{.Min}}">
+        <br>
+        Maximum Length: <input type="text" name="max" size="2" value="{{.Max}}">
+        <br>
+        <input type="submit" value="Search">
+    </form>
 </div>
 <div>
-    <h1>Instructions</h1>
-    <div>{{.Instructions}}</div>
+    <h1>Results ({{.Count}})</h1>
+    <ul>
+        {{range $k, $v := .Matches}}
+        <li>{{$v}}</li>
+        {{end}}
+    </ul>
 </div>
-<p>[<a href="/edit/{{.Filename}}">edit</a>]</p>
 
 </body>
 </html>
