@@ -6,25 +6,69 @@ Copyright 2014 Quincy Bowers.  All rights reserved.
 
 <html>
 <head>
-  <title>{{.Title}} - {{.Query}}</title>
+<title>{{.Title}} - {{.Query}}</title>
+<style type="text/css">
+div#searchForm {
+    display: inline-block;
+    width: 70%;
+    float: left;
+}
+div#help {
+    display: inline-block;
+}
+</style>
 </head>
 <body>
 <h1>{{.Title}}</h1>
 
 <!-- Page Body -->
-<div>
+<div id="searchForm">
     <h1>Search</h1>
     <form action="/search" method="GET">
-        Search Pattern: <input type="text" name="query" size="80" value="{{.Query}}">
-        <br>
-        Minimum Length: <input type="text" name="min" size="2" value="{{.Min}}">
-        <br>
-        Maximum Length: <input type="text" name="max" size="2" value="{{.Max}}">
-        <br>
-        <input type="submit" value="Search">
+        <table>
+            <tr>
+                <td>Search Pattern:</td>
+                <td><input type="text" name="query" size="30" value="{{.Query}}"></td>
+            </tr>
+            <tr>
+                <td>Minimum Length:</td>
+                <td><input type="text" name="min" size="2" value="{{.Min}}"></td>
+            </tr>
+            <tr>
+                <td>Maximum Length:</td>
+                <td><input type="text" name="max" size="2" value="{{.Max}}"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Search"></td>
+                <td></td>
+            </tr>
+        </table>
     </form>
 </div>
-<div>
+
+<div id="help">
+    <dl>
+        <dt>^</dt>
+        <dd>matches the start of the word</dd>
+        <dt>$</dt>
+        <dd>matches the end of the word</dd>
+        <dt>.</dt>
+        <dd>matches any single character</dd>
+        <dt>[aeiou]</dt>
+        <dd>matches any single vowel</dd>
+        <dt>[^aeiou]</dt>
+        <dd>matches any single non-vowel</dd>
+        <dt>ee|oo</dt>
+        <dd>matches either <em>ee</em> or <em>oo</em></dd>
+        <dt>(ee|oo)t</dt>
+        <dd>matches either <em>ee</em> or <em>oo</em> followed by a t (beet, toot, etc.)</dd>
+        <dt>[a-f]</dt>
+        <dd>matches any single a, b, c, d, e, or f character</dd>
+        <p><a href="http://code.google.com/p/re2/wiki/Syntax">Complete Syntax</a>.</p>
+    </dl>
+</div>
+
+<div id="results">
     <h1>Results ({{.Count}})</h1>
     <ul>
         {{range $k, $v := .Matches}}
